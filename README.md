@@ -8,7 +8,7 @@ Our company would design a data dashboard for Boston University (BU) community t
 
 # 2. Structure
 
-<img scr="structure.png">
+![structure](structure.png)
 
 # 3. Data Access and Computation
 
@@ -100,7 +100,7 @@ The dashboard design prototype is shown below.
 
 For the frontend of our dashboard, we would mainly use JavaScript to create all the UI and dynamic and interactive features.
 
-<img src="interface.png">
+![interface](interface.png)
 
 # 5. Insights and Recommendation
 
