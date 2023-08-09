@@ -1,0 +1,18 @@
+def main(private (field, bool) data, private field[3] shares) -> field{
+    /*
+        This zk-proof is to show:
+            1) the data is correct and comes from the corresponding sensor 
+            2) the shares we generate can indeed add up 
+               to be the value of the data
+        data: (val, digital signature of sensor) 
+              store data and its zk-proof
+        shares: the three shares we randomly generate
+    */
+    assert(data.1 == true) // verify that sig is from the right sensor
+    field sum = 0;
+    for u32 i in 0..3 {
+        sum = sum +  data[i].0;
+    }
+    assert(sum == data); // verify that the three shares add up to be sum
+    return;
+}
