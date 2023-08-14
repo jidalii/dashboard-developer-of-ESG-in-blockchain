@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
+
 contract VerifySignature {
     function verify(address _signer, string memory _message, bytes memory _sig) 
         external pure returns (bool) {
@@ -34,7 +35,14 @@ contract VerifySignature {
     } 
 }
 
+
+
 contract ZKProof {
+    struct singleShare {
+        uint val; // the value of the daily data of the sensor
+        bool zk; // the result of zk-proof of the value showing it is from the sensor
+    }   
+
     function zk1(VerifySignature _verifySignature, string memory _message, bytes memory _sig, uint _data, uint[] memory _shares) public view {
         /*
             This zk-proof is to show:
@@ -52,5 +60,16 @@ contract ZKProof {
             sum += _shares[i];
         }
         require(sum == _data, "incorrect value");
+    }
+    function zk2(singleShare[] memory _datals) public pure returns (uint){
+        /*
+            This zk-proof is to show that the aggregation data is indeed correct
+        */
+        uint sum = 0;
+        for(uint i=0; i<_datals.length; i++) {
+            require(_datals[i].zk, "invalid zk");
+            sum += _datals[i].val;
+        }
+        return sum;
     }
 }
